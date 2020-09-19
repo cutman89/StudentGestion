@@ -1,0 +1,107 @@
+﻿<Page x:Class="StudentGestion.View.NoteGestion"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:StudentGestion.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="NoteGestion" DataContext="{Binding NoteGestionService,Source={StaticResource Locator}}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Grid.Row="0" Grid.Column="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Numero d'inscription" Grid.Row="0" Grid.Column="0"/>
+                    <ComboBox x:Name="combo1" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding students }" SelectedItem="{Binding SelectedStudent}" Width="150">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Num_Etu}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Label Content="Nom et prenom" Grid.Row="1" Grid.Column="0" Margin="0,20,0,0"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0,20,0,0">
+                        <TextBox.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding  Path="SelectedStudent.Nom_Etu"  />
+                                <Binding Path="SelectedStudent.Prenom_Etu" />
+                            </MultiBinding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <Label Content="Module" Grid.Row="2" Grid.Column="0" Margin="0,20,0,0"/>
+                    <ComboBox Grid.Row="2" Grid.Column="1" Margin="0,20,0,0" ItemsSource="{Binding modules}" SelectedItem="{Binding SelectedModule}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Nom_Mod}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <Label Content="Note" Grid.Row="3" Grid.Column="0" Margin="0,20,0,0"/>
+                    <TextBox Text="{Binding Note}" Grid.Row="3" Grid.Column="1" Margin="0,20,0,0"/>
+                </Grid>
+            </GroupBox>
+            <GroupBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Column="0" Grid.Row="0" Content="Nouveau"/>
+                    <Button Grid.Row="1" Content="Enregister Note" Command="{Binding RecordNote}"/>
+                    <Button Grid.Row="2" Content="Modifier Note"/>
+                    <Button Grid.Row="3" Content="Apercu" Command="{Binding Appercu}"/>
+                    <Button Grid.Row="4" Content="Quitter"/>
+                </Grid>
+            </GroupBox>
+        </Grid>
+        <Grid Grid.Row="1"  Margin="20,20,20,20">
+            <ListView x:Name="list" ItemsSource="{Binding sheets}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="{Binding Num_Etu}" />
+                            <Label  Content="{Binding FirstName}" />
+                            <Label  Content="{Binding LastName}" />
+                            <Label  Content="{Binding ModuleName}" />
+                            <Label Content="{Binding Note}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </Grid>
+           
+           
+        </Grid>
+      
+      
+    
+</Page>

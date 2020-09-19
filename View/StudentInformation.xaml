@@ -1,0 +1,81 @@
+﻿<Page x:Class="StudentGestion.View.StudentInformation"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:StudentGestion"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="700"
+      Background="white"
+      Title="StudentInformation" DataContext="{Binding Path=StudentInformationService,Source={StaticResource Locator}}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Infos Etudiants" Margin="20,20,0,0" Width="350" Grid.Column="0" Grid.Row="0"  VerticalAlignment="Top" HorizontalAlignment="Left">
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0">Numero d'inscription</Label>
+                <TextBox x:Name="numInscri" Text="{Binding NumInscription}"  Grid.Column="1" Grid.Row="0"  Margin="20,0,0,0" />
+                <Label Grid.Row="1" Margin="0,20,0,0">Nom</Label>
+                <TextBox x:Name="nom" Text="{Binding Name}"  Grid.Row="1" Grid.Column="1" Margin="20,20,0,0" />
+                <Label Grid.Row="2" Margin="0,20,0,0">Prenom</Label>
+                <TextBox x:Name="prenom" Text="{Binding Prenom}" Grid.Row="2" Grid.Column="1" Margin="20,20,0,0" />
+                <Label Grid.Row="3" Margin="0,20,0,0">Date de Naissance</Label>
+                <DatePicker x:Name="dateNaiss" SelectedDate="{Binding Date}" Grid.Row="3" Grid.Column="1"  SelectedDateFormat="Short" Margin="20,20,0,0"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="0"  Margin="12,30,0,0" Width="200" Height="250" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Margin="10" >
+                    <Button Content="Nouveau" Grid.Row="0" Command="{Binding Nouveau}"/>
+                    <Button Content="Recherche par numero" Grid.Row="1" Margin="0,10,0,0" Command="{Binding SearchStudent}"/>
+                    <Button Content="Ajouter" Grid.Row="2" Margin="0,10,0,0" Command="{Binding AddStudent}"/>
+                    <Button Content="Modifier" Grid.Row="3" Margin="0,10,0,0" Command="{Binding ModifyStudent}"/>
+                    <Button Content="Supprimer" Grid.Row="4" Margin="0,10,0,0" Command="{Binding EraseStudent}"/>
+                    <Button Content="Moyenne" Grid.Row="5" Margin="0,10,0,0"/>
+                    <Button Content="Quitter" Grid.Row="6" Margin="0,10,0,0"/>
+       </StackPanel>
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Row="2"  Grid.Column="0" Margin="90,0,0,0" Width="600" Height="50" VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Grid>
+           
+                <StackPanel  Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Button Content="&lt;&lt;" Grid.Row="0" Width="50" Height="40"/>
+                    <Button Content="&lt;" Grid.Row="1" Margin="50,0,0,0" Width="50" Height="40"/>
+                    <Button Content=">" Grid.Row="2" Margin="50,0,0,0" Width="50" Height="40"/>
+                    <Button Content=">>" Grid.Row="3" Margin="50,0,0,0" Width="50" Height="40"/>
+                   
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+
+</Page>

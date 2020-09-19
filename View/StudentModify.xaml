@@ -1,0 +1,20 @@
+﻿<Window x:Class="StudentGestion.View.StudentModify"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:StudentGestion"
+        mc:Ignorable="d"
+        Title="StudentModify" Height="450" Width="800"  DataContext="{Binding  StudentModifyService,Source={StaticResource Locator}}">
+    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <Label VerticalAlignment="Center" HorizontalAlignment="Center">Numero d'inscription</Label>
+        <TextBox x:Name="numInscri" Text="{Binding NumInscription}"  VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" />
+        <Label VerticalAlignment="Center" HorizontalAlignment="Center">Nom</Label>
+        <TextBox x:Name="nom" Text="{Binding Name}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200"/>
+        <Label VerticalAlignment="Center" HorizontalAlignment="Center" >Prenom</Label>
+        <TextBox x:Name="prenom"  Text="{Binding Prenom}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200" />
+        <Label VerticalAlignment="Center" HorizontalAlignment="Center" >Date de Naissance</Label>
+        <DatePicker x:Name="dateNaiss"  SelectedDate="{Binding Date}" VerticalAlignment="Center" HorizontalAlignment="Center" Width="200"/>
+        <Button x:Name="modify" Content="Modifier" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20,0,0" Command="{Binding ModifyCommand}"/>
+    </StackPanel>
+</Window>
