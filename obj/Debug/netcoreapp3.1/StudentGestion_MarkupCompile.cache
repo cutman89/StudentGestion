@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
 C:\Users\Mohamed\source\repos\StudentGestion\StudentGestion\App.xaml
-9148138878
+101733967220
 
-28-922919200
+30-634227663
 204-1402494449
-View\AffichageNote.xaml;View\BindablePasswordBox.xaml;View\Home.xaml;View\LoginPage.xaml;View\MainWindow.xaml;View\ModuleGestion.xaml;View\NoteGestion.xaml;View\StudentInformation.xaml;View\StudentModify.xaml;
+View\AffichageNote.xaml;View\AverageView.xaml;View\BindablePasswordBox.xaml;View\Home.xaml;View\LoginPage.xaml;View\MainWindow.xaml;View\ModuleGestion.xaml;View\NoteGestion.xaml;View\StudentInformation.xaml;View\StudentModify.xaml;
 
 False
 

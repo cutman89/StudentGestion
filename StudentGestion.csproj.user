@@ -10,6 +10,9 @@
     <Compile Update="View\AffichageNote.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="View\AverageView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\BindablePasswordBox.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -37,6 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="View\AffichageNote.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\AverageView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="View\BindablePasswordBox.xaml">

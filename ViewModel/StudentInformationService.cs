@@ -6,6 +6,7 @@ using StudentGestion.Services;
 using StudentGestion.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows;
 
@@ -15,7 +16,8 @@ namespace StudentGestion.ViewModel
     {
         #region Declaration
         private bool _exist;
-       
+        private bool _existNote;
+        int count=0;
         private IFrameNavigationService _navigationService;
         private string _numInscription;
         public string NumInscription
@@ -25,7 +27,7 @@ namespace StudentGestion.ViewModel
             set
             {
                 _numInscription = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("NumInscription");
             }
         }
         private string _nom;
@@ -37,7 +39,7 @@ namespace StudentGestion.ViewModel
             set
             {
                 _nom = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("Name");
             }
         }
         private string _prenom;
@@ -49,7 +51,7 @@ namespace StudentGestion.ViewModel
             set 
             {
                 _prenom = value;
-                RaisePropertyChanged();
+                RaisePropertyChanged("Prenom");
             }
         }
         private DateTime _date;
@@ -285,10 +287,105 @@ namespace StudentGestion.ViewModel
             }
         }
         #endregion
-        
+        #region Moyenne
+        private RelayCommand _averageCommand;
+        public RelayCommand AverageCommand
+        {
+            get
+            {
+                return _averageCommand ?? (_averageCommand = new RelayCommand(() =>
+                  {
+                      _exist = false;
+                      _existNote = false;
+                      count = 0;
+                      AverageService averageService = new AverageService(_navigationService);
+                      SQLiteConnection connection = new SQLiteConnection(App.databasePath);
+                      try
+                      {
+                          var output = connection.Query<Student>("select * from student where Student.Num_Etu= " + NumInscription);
+                          var outputNote = connection.Query<Notes>("select * from notes where Notes.Num_Etu= " + NumInscription);
+                          var outputModule = connection.Query<Module>("select * from module");
+
+                          foreach (var value in output)
+                          {
+                              if (NumInscription == value.Num_Etu.ToString())
+                              {
+
+                                  averageService.FirstName = value.Nom_Etu;
+                                  averageService.LastName = value.Prenom_Etu;
+                                  foreach (var val in outputModule)
+                                  {
+                                      foreach (var valNote in outputNote)
+                                      {
+                                          
+                                          if (value.Num_Etu == valNote.Num_Etu && val.Num_Mod == valNote.Num_Mod)
+                                          {
+                                              
+                                              averageService.sheets.Add(
+                                                  new SheetMark
+                                                  {
+                                                      ModuleName = val.Nom_Mod,
+                                                      Note = valNote.Note.ToString()
+                                                  });
+                                             
+                                              averageService.Average += valNote.Note;
+                                             
+                                          }
+                                      }
+                                      
+                                      _exist = true;
+                                  }
+                              }
+                          }
+                          foreach (var list in averageService.sheets)
+                          {
+                              if (list.Note == null)
+                              {
+                                  _existNote = false;
+                                  break;
+                              }
+                              else
+                              {
+                                  _existNote = true;
+                                  count = count + 1;
+                                 
+                              }
+                          }
+
+                          if (_exist == true && _existNote == true  && count==outputModule.Count)
+                          {
+                              averageService.Average /= outputNote.Count;
+                              averageService.Show(averageService);
+                          }
+                         else if(_existNote==false )
+                          {
+                              MessageBox.Show("note doesnt exist");
+                          }
+                          else if(count <outputModule.Count)
+                          {
+                              MessageBox.Show("note missing");                                                                                  
+                          }
+                          else
+                          {
+                              MessageBox.Show("input doesn't exist");
+                          }
+                      }
+                      catch (Exception x)
+                      {
+                          MessageBox.Show("Doesnt exist " + x.Message);
+                      }
+                      finally
+                      {
+                          connection.Close();
+                      }
+                  }));
+            }
+        }
+        #endregion
         #region Constructor
         public StudentInformationService(IFrameNavigationService navigationService)
         {
+            
             _navigationService = navigationService;
         }
         #endregion

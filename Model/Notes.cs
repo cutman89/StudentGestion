@@ -9,6 +9,6 @@ namespace StudentGestion.Model
        public int Num_Etu { get; set; }
 
         public int Num_Mod { get; set; }
-        public double Note { get; set; }
+        public double  Note { get; set; }
     }
 }

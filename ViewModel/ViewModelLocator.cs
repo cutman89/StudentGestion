@@ -40,6 +40,7 @@ namespace StudentGestion.ViewModel
             SimpleIoc.Default.Register<LoginService>();
             SimpleIoc.Default.Register<AffichageNoteService>();
             SimpleIoc.Default.Register<NoteGestionService>();
+            SimpleIoc.Default.Register<AverageService>();
             SetupNavigation();
         }
 
@@ -54,6 +55,7 @@ namespace StudentGestion.ViewModel
             navigationService.Configure("LoginPage", new Uri("../View/LoginPage.xaml", UriKind.Relative));
             navigationService.Configure("AffichageNote", new Uri("../View/AffichageNote.xaml", UriKind.Relative));
             navigationService.Configure("NoteGestion", new Uri("../View/NoteGestion.xaml", UriKind.Relative));
+            navigationService.Configure("AverageView", new Uri("../View/AverageView.xaml", UriKind.Relative));
             SimpleIoc.Default.Register<IFrameNavigationService>(() => navigationService);
         }
         public MainService Main
@@ -111,6 +113,13 @@ namespace StudentGestion.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<NoteGestionService>();
+            }
+        }
+        public AverageService AverageService
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<AverageService>();
             }
         }
         /// <summary>

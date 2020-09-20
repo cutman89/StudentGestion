@@ -34,49 +34,7 @@ namespace StudentGestion.View
 
       
 
-        private void Add_Student(object sender, RoutedEventArgs e)
-        {
-            
-          
-        }
-        private void Erase_Student(object sender,RoutedEventArgs e)
-        {
-
-            
-        }
       
-        
-        private void Modify_Student(object sender, RoutedEventArgs e)
-        {
-
-            StudentModify studentModify = new StudentModify();
-            SQLiteConnection connection = new SQLiteConnection(App.databasePath);
-
-            try
-            {
-                var output = connection.Query<Student>("select * from student where Student.Num_Etu= " + numInscri.Text);
-
-                foreach (var value in output)
-                {
-                    studentModify.numInscri.Text = value.Num_Etu.ToString();
-                    studentModify.nom.Text = value.Nom_Etu;
-                    studentModify.prenom.Text = value.Prenom_Etu;
-                    studentModify.dateNaiss.Text = value.DateN_Etu.ToString();
-                }
-
-            }
-            catch (Exception x)
-            {
-                MessageBox.Show("Doesnt exist" + x.Message);
-            }
-            finally
-            {
-                connection.Close();
-            }
-           
-            studentModify.Show();
-
-        }
 
     }
 }
