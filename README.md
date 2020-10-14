@@ -4,3 +4,4 @@ A WPF Application Where you manage  a list of  students and their grades,Add,Del
 # What I learned
 * MVVM With Prisme.
 * OOP IN C#
+* Use SQLITE
